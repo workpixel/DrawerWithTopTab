@@ -31,14 +31,7 @@ const Drawer = createDrawerNavigator();
 const Tab = createMaterialTopTabNavigator();
 
 const CustomDrawer = (props) => {
-  let last          = props.state.routes;
-
-  //let curentScreen = props.navigation.state.routes[0].routes[last].routeName;
-
-  //console.log(last);
-
- console.log( props.state.routes[0].state.index);
-
+  
   return (
     <ScrollView style={styles.container}>
       <View  style={{ flex: 1, color: "#ff5c00" }}  >
@@ -46,23 +39,17 @@ const CustomDrawer = (props) => {
 
 <DrawerItem
             label='Home'
-           focused={getActiveRouteState2(
+           focused={getActiveRouteState(
             props,
             'HomeScreenStack'
           )}
           onPress={() => {
-            props.navigation.dispatch({
-              ...CommonActions.reset({
-                index: 2,
-                routes: [{ name: "HomeScreen" }]
-              })
-            });
             props.navigation.navigate('HomeScreen');
           }}
           />
 <DrawerItem
             label='Explore'
-            focused={getActiveRouteState2(
+            focused={getActiveRouteState(
               props,
               'ExploreScreenStack'
             )}
@@ -74,7 +61,7 @@ const CustomDrawer = (props) => {
 <DrawerItem
             label='Setting'
            
-            focused={getActiveRouteState2(
+            focused={getActiveRouteState(
               props,
               'SettingScreenStack'
             )}
@@ -87,7 +74,7 @@ const CustomDrawer = (props) => {
 <DrawerItem
             label='Game'
            
-            focused={getActiveRouteState2(
+            focused={getActiveRouteState(
               props,
               'GameScreenStack'
             )}
@@ -100,7 +87,7 @@ const CustomDrawer = (props) => {
 <DrawerItem
             label='Health'
            
-            focused={getActiveRouteState2(
+            focused={getActiveRouteState(
               props,
               'HealthScreenStack'
             )}
@@ -114,24 +101,15 @@ const CustomDrawer = (props) => {
   );
 };
 
-const getActiveRouteState = function (routes, index, name) {
-  if(routes[index].name === name){
-    return true;
+const getActiveRouteState = function (myprops,routeName) {
+  if(typeof myprops.state.routes[0].state !== 'undefined') {
+    const { items } = myprops;
+    const currentRouteName = myprops.state.routeNames[myprops.state.routes[0].state.index];
+    return currentRouteName === routeName;
   } else {
-    return false;
+    return false
   }
 };
-
-
-const getActiveRouteState2 = function (myprops,routeName) {
-  const { items } = myprops;
-  const currentRouteName = myprops.state.routeNames[myprops.state.routes[0].state.index];
-
-  console.log(myprops.state.index,currentRouteName,routeName);
-
-  return currentRouteName === routeName;
-};
-
 const styles = StyleSheet.create ({
   myState: {
     alignSelf: 'flex-end',

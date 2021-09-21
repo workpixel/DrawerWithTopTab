@@ -20,7 +20,7 @@ const GameScreen = ({navigation}) => {
               textAlign: 'center',
               marginBottom: 16,
             }}>
-            Setting Screen
+            Game Screen
           </Text>
           <Button
             onPress={() => navigation.navigate('HomeScreenStack')}

@@ -20,7 +20,7 @@ const HealthScreen = ({navigation}) => {
               textAlign: 'center',
               marginBottom: 16,
             }}>
-            Setting Screen
+            Health Screen
           </Text>
           <Button
             onPress={() => navigation.navigate('HomeScreenStack')}
